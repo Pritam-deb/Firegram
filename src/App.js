@@ -33,7 +33,11 @@
 import React from "react";
 import Application from "./comps/Application";
 <<<<<<< HEAD
+<<<<<<< HEAD
 import UserProvider from "./comps/contexts/UserProvider";
+=======
+import UserProvider from "./contexts/UserProvider";
+>>>>>>> parent of c8dd5cb... :fire:
 =======
 import UserProvider from "./contexts/UserProvider";
 >>>>>>> parent of c8dd5cb... :fire:
