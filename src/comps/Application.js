@@ -6,10 +6,10 @@ import PasswordReset from "./PasswordReset";
 
 
 
-import ImageGrid from './ImageGrid';
-import Modal from './Modal';
-import Title from './Title';
-import UploadForm from './UploadForm';
+import ImageGrid from './comps/ImageGrid';
+import Modal from './comps/Modal';
+import Title from './comps/Title';
+import UploadForm from './comps/UploadForm';
 function Application() {
   const user = null;
   const [selectedImg, setSelectedImg] = useState(null);
