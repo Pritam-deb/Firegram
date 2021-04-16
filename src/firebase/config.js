@@ -4,6 +4,38 @@ import 'firebase/storage';
 import 'firebase/firestore';
 
 
+export const generateUserDocument = async (user, additionalData) => {
+    if (!user) return;
+    const userRef = firestore.doc(`users/${user.uid}`);
+    const snapshot = await userRef.get();
+    if (!snapshot.exists) {
+      const { email, displayName, photoURL } = user;
+      try {
+        await userRef.set({
+          displayName,
+          email,
+          photoURL,
+          ...additionalData
+        });
+      } catch (error) {
+        console.error("Error creating user document", error);
+      }
+    }
+    return getUserDocument(user.uid);
+  };
+  const getUserDocument = async uid => {
+    if (!uid) return null;
+    try {
+      const userDocument = await firestore.doc(`users/${uid}`).get();
+      return {
+        uid,
+        ...userDocument.data()
+      };
+    } catch (error) {
+      console.error("Error fetching user", error);
+    }
+  };
+
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
@@ -20,6 +52,10 @@ firebase.initializeApp(firebaseConfig);
 const projectStorage = firebase.storage();
 const projectFirestore = firebase.firestore();
 const timestamp = firebase.firestore.FieldValue.serverTimestamp;
-const authentication = firebase.auth();
+const provider = firebase.auth.GoogleAuthProvider();
 
-export { projectStorage, projectFirestore, timestamp, authentication };
+export const signInWithGoogle = () => {
+    auth.signInWithPopup(provider);
+};
+
+export { projectStorage, projectFirestore, timestamp, provider };
