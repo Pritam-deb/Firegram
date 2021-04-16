@@ -2,11 +2,11 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/storage';
 import 'firebase/firestore';
-import { functions } from "firebase";
+
 
 export const generateUserDocument = async (user, additionalData) => {
     if (!user) return;
-    const userRef = projectFirestore.doc(`users/${user.uid}`);
+    const userRef = firestore.doc(`users/${user.uid}`);
     const snapshot = await userRef.get();
     if (!snapshot.exists) {
       const { email, displayName, photoURL } = user;
@@ -26,7 +26,7 @@ export const generateUserDocument = async (user, additionalData) => {
   const getUserDocument = async uid => {
     if (!uid) return null;
     try {
-      const userDocument = await projectFirestore.doc(`users/${uid}`).get();
+      const userDocument = await firestore.doc(`users/${uid}`).get();
       return {
         uid,
         ...userDocument.data()
@@ -49,14 +49,13 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-const auth = firebase.auth();
 const projectStorage = firebase.storage();
 const projectFirestore = firebase.firestore();
 const timestamp = firebase.firestore.FieldValue.serverTimestamp;
-const context = firebase.auth.GoogleAuthProvider();
+const provider = firebase.auth.GoogleAuthProvider();
 
 export const signInWithGoogle = () => {
-    auth.signInWithPopup(context);
+    auth.signInWithPopup(provider);
 };
 
-export { projectStorage, projectFirestore, timestamp, context, auth };
+export { projectStorage, projectFirestore, timestamp, provider };

@@ -32,7 +32,7 @@
 
 import React from "react";
 import Application from "./comps/Application";
-import UserProvider from "./comps/contexts/UserProvider";
+import UserProvider from "../contexts/UserProvider";
 function App() {
   return (
     <UserProvider>

@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
-import { signInWithGoogle } from "../firebase/config";
-import { auth } from "../firebase/config";
+import { Link } from "@reach/router";
 
 const PasswordReset = () => {
   const [email, setEmail] = useState("");

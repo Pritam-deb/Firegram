@@ -1,13 +1,5 @@
 import React, { useState } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
-
-import { auth, signInWithGoogle, generateUserDocument } from "../firebase/config";
-
+import { Link } from "@reach/router";
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
