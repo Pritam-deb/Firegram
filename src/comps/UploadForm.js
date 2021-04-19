@@ -1,5 +1,8 @@
-import React,{useState} from "react";
+import React,{useState, useEffect} from "react";
 import ProgressBar from "./ProgressBar";
+import {auth} from '../firebase/config';
+import { toast } from 'react-toastify';
+import { makeStyles } from '@material-ui/core/styles';
 
 const UploadForm = () => {
 
@@ -7,6 +10,53 @@ const UploadForm = () => {
     const [file,setFile] = useState(null);
     const types = ['image/png', 'image/jpeg', 'image/webp'];
     const [error,setError] = useState(null);
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        const unSubscribe=  auth.onAuthStateChanged((authUser) => {
+        if(authUser){
+                setUser(authUser);
+            }else{
+                setUser(null);
+            }
+        })
+        
+        return () => {
+            // perform some cleanup action here...
+            unSubscribe();
+            }
+        }, [user, username]
+    );
+
+
+
+    const signup = (event) => {
+        event.preventDefault();
+
+        auth.createUserWithEmailAndPassword(email, password)
+        .then((authUser) => {
+        return authUser.user.updateProfile({
+            displayName: username
+        })
+        })
+        .catch(error => toast.error(error.message, {position: 'top-center'}))
+
+        setOpen(false);
+    }
+
+
+    const signin = (event) => {
+        event.preventDefault();
+    
+        auth.signInWithEmailAndPassword(email, password)
+        .catch(error => toast.error(error.message, {position: 'top-center'}))
+    
+        setOpenSignIn(false);
+    }
+
+
+
+
 
     const changeHandler = (e) =>{
         // console.log('changeHandler triggered ');
@@ -31,6 +81,7 @@ const UploadForm = () => {
             <label>
                 <input type='file' onChange={changeHandler}/>
                 <span>+</span>
+                <Button onClick={() => auth.signOut()}>logout</Button> 
             </label>
             
             <div className = 'output'>
