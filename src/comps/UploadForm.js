@@ -3,6 +3,7 @@ import ProgressBar from "./ProgressBar";
 import {auth} from '../firebase/config';
 import { toast } from 'react-toastify';
 import { makeStyles } from '@material-ui/core/styles';
+import { Avatar, Button, Input, Modal } from '@material-ui/core';
 
 const UploadForm = () => {
 
@@ -11,6 +12,12 @@ const UploadForm = () => {
     const types = ['image/png', 'image/jpeg', 'image/webp'];
     const [error,setError] = useState(null);
     const [user, setUser] = useState(null);
+    const [open, setOpen] = useState(false);
+    const [posts, setPosts] = useState([]);
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [openSignIn, setOpenSignIn] = useState(false);
 
     useEffect(() => {
         const unSubscribe=  auth.onAuthStateChanged((authUser) => {
