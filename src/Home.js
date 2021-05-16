@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import ImageGrid from './comps/imageGrid';
-import Modal from './comps/modal';
+import ImageGrid from './comps/ImageGrid';
+import Modal from './comps/Modal';
 import Title from './comps/Title';
 import Navbar from './comps/Navbar'
-import UploadForm from './comps/uploadForm'
+import UploadForm from './comps/UploadForm'
 
 
 export default function Home() {

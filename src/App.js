@@ -9,7 +9,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Home from './Home'
 import Login from './comps/Login'
 import PrivateRoute from './comps/PrivateRoute';
-import ForgotPassword from './comps/ForgotPassword'
+import ForgotPassword from './comps/ForgotPassword';
 
 
 
