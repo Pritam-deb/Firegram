@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Signup from './comps/Signup';
+import { Container } from 'react-bootstrap';
 import ImageGrid from './comps/ImageGrid';
 import Modal from './comps/Modal';
 import Title from './comps/Title';
